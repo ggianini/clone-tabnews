@@ -6,12 +6,12 @@ async function query(queryObject) {
         host: process.env.POSTGRES_HOST,
         port: process.env.POSTGRES_PORT,
         user: process.env.POSTGRES_USER,
-        database: process.env.POSTGRES_DATABASE,
-        password: process.env.POSTGRES_PASSWORD,
+        database: process.env.POSTGRES_DB,
+        password: process.env.PGPASSWORD,
     });
+  
     await client.connect();
     console.log(client.database)
-    console.log(process.env.POSTGRES_DATABASE)
     const result = await client.query(queryObject); 
     await client.end((err) => {
         if (err) {
