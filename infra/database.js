@@ -10,16 +10,9 @@ async function query(queryObject) {
   });
 
   await client.connect();
-  console.log(client.database);
+
   const result = await client.query(queryObject);
-  client.end((err) => {
-    if (err) {
-      console.error("Erro ao fechar a conexão:", err);
-      // Re-abrir a conexão, registrar erro, etc.
-    } else {
-      console.log("Conexão fechada com sucesso");
-    }
-  });
+  client.end();
   return result;
 }
 
