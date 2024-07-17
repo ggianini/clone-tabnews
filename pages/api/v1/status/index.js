@@ -1,8 +1,7 @@
-import database from "../../../../infra/database.js"
+import database from "/infra/database.js";
 
-  export default async function status(request, response) {
+export default async function status(request, response) {
   const result = await database.query("SELECT 10+1 as sum;");
   console.log(result.rows[0]);
-  response.status(200).json({response: "OK"});
+  response.status(200).json({ response: "OK" });
 }
-
