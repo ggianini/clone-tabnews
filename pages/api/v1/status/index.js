@@ -1,7 +1,8 @@
-export default function status(request, response) {
-  response.status(200).json({
-    code: "200",
-    status: "OK",
-    message: "alunos são exceção",
-  });
+import database from "../../../../infra/database.js"
+
+  export default async function status(request, response) {
+  const result = await database.query("SELECT 10+1 as sum;");
+  console.log(result.rows[0]);
+  response.status(200).json({response: "OK"});
 }
+
