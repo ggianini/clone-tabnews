@@ -1,5 +1,5 @@
 function Home() {
-  const message = "Eu amo a nossa família! ❤️";
+  const message = "Em construção";
   return <h1>{message}</h1>;
 }
 
