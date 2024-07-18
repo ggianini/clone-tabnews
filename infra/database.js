@@ -9,12 +9,13 @@ async function query(queryObject) {
     password: process.env.PGPASSWORD,
   });
 
-  await client.connect();
   try {
+    await client.connect();
     const result = await client.query(queryObject);
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   } finally {
     client.end();
   }
