@@ -5,17 +5,9 @@ async function query(queryObject) {
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
     user: process.env.POSTGRES_USER,
-    database: process.env.POSTGRES_DB,
+    database: process.env.PGDATABASE,
     password: process.env.PGPASSWORD,
-    ssl: process.env.NODE_ENV === "development" ? false : true,
-  });
-
-  console.log("Variáveis de ambiente do Postgres:", {
-    host: process.env.POSTGRES_HOST,
-    port: process.env.POSTGRES_PORT,
-    user: process.env.POSTGRES_USER,
-    database: process.env.POSTGRES_DB,
-    password: process.env.PGPASSWORD,
+    ssl: getSSLValues(),
   });
 
   try {
@@ -33,3 +25,13 @@ async function query(queryObject) {
 export default {
   query: query,
 };
+
+function getSSLValues() {
+  if (process.env.POSTGRES_CA) {
+    return {
+      ca: process.env.POSTGRES_CA,
+    };
+  }
+
+  return process.env.NODE_ENV === "development" ? false : true;
+}
